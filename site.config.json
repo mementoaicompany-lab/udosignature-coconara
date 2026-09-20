@@ -27,7 +27,7 @@
   "sameAs": [
     "https://smartstore.naver.com/udorent"
   ],
-  "naverVerification": null,
+  "naverVerification": "260aa2aa15e1ff47e56bce2d6a76613da4a0f63b",
   "contentCheckedAt": "2026-09-20",
   "analytics": {
     "namespace": "udosignature_coconara",
