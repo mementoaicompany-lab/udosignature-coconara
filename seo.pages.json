@@ -30,7 +30,7 @@
     "file": "course.html",
     "updatedAt": "2026-09-23",
     "searchIntent": "우도 가볼만한곳·해안 여행코스·지도",
-    "redirect": "https://udo.udosignature.com/",
+    "redirect": "https://coconara.udosignature.com/udo/",
     "noindex": true
   },
   "guide/": {
@@ -64,17 +64,15 @@
     "file": "ferry.html",
     "updatedAt": "2026-09-23",
     "searchIntent": "우도 배시간·하우목동항 마지막 배·차량 반납",
-    "redirect": "https://udo.udosignature.com/ferry/",
     "noindex": true
   },
   "udo/": {
-    "title": "제주도 우도 여행 준비 | 가는 법·이동수단·일정 | 코코나라",
-    "description": "제주도 우도 여행이 처음이라면 배편과 도착 항구부터 확인하세요. 전기차·전기스쿠터 선택, 가볼만한곳, 당일 반납시간과 예약 준비를 코코나라가 순서대로 안내합니다.",
+    "title": "코코나라 우도 여행 지도 | 하우목동항 출발 코스",
+    "description": "하우목동항에서 출발하는 코코나라 고객의 우도 여행 지도. 하고수동·비양도·검멀레·서빈백사 위치와 안내를 한 페이지에서 보고 반납시간에 맞춰 일정을 준비하세요.",
     "label": "제주도 우도 여행",
     "file": "udo.html",
     "updatedAt": "2026-09-23",
     "searchIntent": "우도·제주도 우도·우도 여행 준비",
-    "redirect": "https://udo.udosignature.com/",
     "noindex": true
   },
   "customer-guide/": {
@@ -83,6 +81,20 @@
     "label": "예약 고객 안내",
     "file": "customer-guide.html",
     "noindex": true,
+    "updatedAt": "2026-09-23"
+  },
+  "faq/": {
+    "title": "코코나라 Q&A | 우도 전기차·스쿠터 예약·이용 질문",
+    "description": "코코나라 예약 전 자주 묻는 질문. 우도 전기차·스쿠터 요금, 한정 수량 할인, 면허와 이용 제한, 반납시간, 취소·환불, 방문 방법을 한 페이지에서 안내합니다.",
+    "label": "Q&A",
+    "file": "faq.html",
+    "updatedAt": "2026-09-23"
+  },
+  "location/": {
+    "title": "코코나라 오시는길 | 우도 하우목동항·우목길 105",
+    "description": "우도 하우목동항 코코나라 오시는길. 제주시 우도면 우목길 105, 항구에서 도보 약 1분. 승선 전 도착 항구 확인, 매장 지도, 운영시간과 연락처를 안내합니다.",
+    "label": "오시는길",
+    "file": "location.html",
     "updatedAt": "2026-09-23"
   }
 }
