@@ -2,6 +2,7 @@
 from pathlib import Path
 import json,html,shutil,hashlib
 from map_builder import render_map
+from seo_support import enrich
 from urllib.parse import urlparse
 ROOT=Path(__file__).resolve().parent
 C=json.loads((ROOT/'site.config.json').read_text())
@@ -89,6 +90,7 @@ def render(route,p):
  if route=='faq/':
   schema.append({'@type':'FAQPage','@id':canonical+'#questions','mainEntity':[{'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a}} for _,items in json.loads((ROOT/'content/faq.json').read_text()) for q,a in items]})
  if route and not p.get('noindex'):schema.append({'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'코코나라','item':BASE},{'@type':'ListItem','position':2,'name':p['label'],'item':canonical}]})
+ schema=enrich(schema,C,route,p,json.loads((ROOT/'seo.content.json').read_text()))
  body=(ROOT/'src'/p['file']).read_text().replace('{{REFUND}}',(ROOT/'src/refund.fragment.html').read_text())
  if '{{TRAVEL_MAP}}' in body:body=body.replace('{{TRAVEL_MAP}}',render_map(PATH))
  replacements={'BASE':PATH,'BOOKING':booking(),'GUIDE':C['guideUrl'],'INQUIRY':C['inquiryUrl'],'LOCATION':location(),'CONDITIONS':conditions(),'PRICE':price(route),'RIDE':ride_scene('couple',True),'REFUND':(ROOT/'src/refund.fragment.html').read_text(),'FAQ':faq_content()}
@@ -102,6 +104,7 @@ def render(route,p):
  for model in ['coco','fami','open']:
   body=body.replace('{{VEHICLE_'+model.upper()+'}}',ride_scene(model,route=={'coco':'udo-scooter/','fami':'udo-electric-car/','open':None}[model]))
  verification=f'<meta name="naver-site-verification" content="{esc(C["naverVerification"])}">' if C['naverVerification'] else ''
+ verification+=f'<meta name="google-site-verification" content="{esc(C["googleVerification"])}">' if C.get("googleVerification") else ""
  extras=''
  if route=='udo-ferry/':extras+=f'<meta name="udosignature-ferry-source" content="{esc(C["ferrySource"])}">'
  if route=='udo-ferry/':extras+=f'<script src="{asset_url("assets/ferry.js")}" defer></script>'

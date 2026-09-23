@@ -16,11 +16,11 @@ def request(url,*,payload=None):
 
 def main():
  args=argparse.ArgumentParser(description=__doc__);args.add_argument('--submit',action='store_true');args.add_argument('--output',type=Path);a=args.parse_args()
- c=json.loads((ROOT/'site.config.json').read_text());pages=json.loads((ROOT/'seo.pages.json').read_text())
+ c=json.loads((ROOT/'site.config.json').read_text());pages=json.loads((ROOT/('seo.pages.json' if (ROOT/'seo.pages.json').exists() else 'pages.json')).read_text())
  base=c['baseUrl'];key=c['indexNowKey'];u=urlparse(base)
  if base!='https://coconara.udosignature.com/':raise SystemExit('Review this script before changing the domain.')
  if not re.fullmatch(r'[a-fA-F0-9-]{8,128}',key):raise SystemExit('Invalid IndexNow proof.')
- urls=[base+r for r,p in pages.items() if not p.get('noindex')]
+ urls=[base+r for r,p in pages.items() if not p.get('noindex') and not p.get('redirect') and not c.get('private')]
  key_url=base+key+'.txt'
  for target in urls:
   v=urlparse(target)
@@ -31,7 +31,7 @@ def main():
   if status!=200 or body.decode('utf-8')!=key:raise SystemExit('Publish and verify the proof file before notifying Naver.')
   # Ensure the deployed pages exactly match this reviewed build before announcing them.
   for route,p in pages.items():
-   if p.get('noindex'):continue
+   if p.get('noindex') or p.get('redirect') or c.get('private'):continue
    status,body=request(base+route)
    local=ROOT/'docs'/route/'index.html'
    if status!=200 or body!=local.read_bytes():raise SystemExit('Published page differs: '+base+route)
