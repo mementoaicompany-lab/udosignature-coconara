@@ -27,3 +27,13 @@
   });
   document.addEventListener('visibilitychange',()=>scenes.forEach(update));
 })();
+
+// A native disclosure stays usable without JavaScript and starts closed on every page.
+(() => {
+ const guide=document.querySelector('.nav-guide');if(!guide)return;
+ const summary=guide.querySelector('summary');
+ window.addEventListener('pageshow',()=>{guide.open=false;});
+ document.addEventListener('click',event=>{if(guide.open&&!guide.contains(event.target))guide.open=false;});
+ document.addEventListener('keydown',event=>{if(event.key==='Escape'&&guide.open){guide.open=false;summary.focus();}});
+ guide.addEventListener('focusout',()=>{setTimeout(()=>{if(!guide.contains(document.activeElement))guide.open=false;},0);});
+})();
