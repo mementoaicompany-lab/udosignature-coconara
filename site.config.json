@@ -69,5 +69,11 @@
   "alternateName": [
     "우도 코코나라",
     "COCONARA"
-  ]
+  ],
+  "visitorCounter": {
+    "site": "coconara",
+    "startedAt": "2026-10-24",
+    "timezone": "Asia/Seoul",
+    "counting": "browser-per-day"
+  }
 }
