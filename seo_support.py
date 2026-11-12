@@ -19,6 +19,17 @@ def enrich(graph, config, route, page, editorial):
         business.update({'@type':'LocalBusiness','alternateName':'우도 코코나라',
             'logo':base+'assets/coconara-symbol.svg','image':base+'assets/couple-coast-1280.webp',
             'hasMap':'https://map.naver.com/p/entry/place/1159900207'})
+        webpage['about']={'@id':base+'#organization'}
+        for entity in graph:
+            if entity['@type']=='Service':
+                entity['@id']=base+route+'#rental'
+                entity['mainEntityOfPage']={'@id':webpage['@id']}
+                entity['description']=page['description']
+                webpage['mainEntity']={'@id':entity['@id']}
+            elif entity['@type']=='FAQPage':
+                entity['isPartOf']={'@id':webpage['@id']}
+                entity['publisher']={'@id':base+'#organization'}
+                webpage['mainEntity']={'@id':entity['@id']}
     if theme=='signature':
         website['publisher']={'@id':base+'#organization'}
     if theme=='dalkom':
